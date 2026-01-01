@@ -1,0 +1,19 @@
+function addSignature(newsig)
+dataFile = 'SignatureData.mat';
+if exist(dataFile,'file')
+    load(dataFile,'sigTable');
+else
+    sigTable = table(cell(0,1),zeros(0,1),cell(0,1),'VariableNames',{'Signature','Count','Proceed'});
+end
+if ismember(newsig,sigTable.Signature)
+    fprintf('Your signature "%s" is existed in system.\n',newsig);
+else
+    newRow = table({newsig},0,{ {} },'VariableNames',{'Signature','Count','Proceed'});
+    sigTable = [sigTable; newRow];
+    save(dataFile,'sigTable');
+    fprintf('Your signature "%s"is added completely!\n',newsig);
+end
+
+disp('Current list:');
+disp(sigTable);
+end
