@@ -65,7 +65,18 @@ classdef Folder < handle
             list = filesName(cellfun(@(name) obj.isFileExist(name), filesName))';
             %return cell
          end
-
+         function count = getCountAuthor(obj, nameAuthor)
+             count = 0;
+             fileNames = obj.getCurrentFile;
+             for i = 1:length(fileNames)
+                 filePath = fullfile(obj.getPath, fileNames{i});
+                 fileContent = fileread(filePath);
+                 if contains(fileContent, nameAuthor)
+                     count = count + 1;
+                 end
+             end
+         end
+         
          function tf = isWebFile(obj, probNum)
              if isnumeric(probNum) == false
                  probNum = str2num(regexp(probNum, "\d{5}", "match", "once"));
