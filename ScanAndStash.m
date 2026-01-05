@@ -9,7 +9,7 @@ end
 for i = 1:size(table1,1)
     problemName = table1.name{i};
     linkerPath = fullfile(folders,problemName);
-    mFiles = dir(fullfile(linkerPath,'**','*.m'));
+    mFiles = dir(fullfile(linkerPath,'*.m'));
     alreadyCountedInThisProblem = false(height(sigTable),1);
     for j = 1:length(mFiles)
         fullFilePath = fullfile(mFiles(j).folder,mFiles(j).name);
